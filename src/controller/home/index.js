@@ -30,7 +30,7 @@ export default function Home() {
       let strUrl =
         SEARCH +
         '?q=' +
-        selectedSuggestion +
+        txtSearch +
         '&key=' +
         TENOR_KEY +
         '&limit=10&pos=' +
@@ -85,15 +85,14 @@ export default function Home() {
     );
   };
 
+  async function onChangeTextField(e) {
+    await setTxtSearch(e);
+    setIsShowSuggestion(true);
+  }
+
   return (
     <View style={{backgroundColor: 'white', flex: 1}}>
-      <SearchBar
-        onChangeTxt={e => {
-          setTxtSearch(e);
-          setIsShowSuggestion(true);
-        }}
-        txtValue={txtSearch}
-      />
+      <SearchBar onChangeTxt={onChangeTextField} txtValue={txtSearch} />
       {renderSuggestionList()}
       {renderTableOfGif()}
     </View>
